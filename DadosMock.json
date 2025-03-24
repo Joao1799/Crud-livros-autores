@@ -1,0 +1,117 @@
+{
+  "authors": [
+    {
+      "id": "1",
+      "name": "Machado de Assis",
+      "email": "machado@literatura.com"
+    },
+    {
+      "id": "2",
+      "name": "J.K. Rowling",
+      "email": "jk@hogwarts.com"
+    },
+    {
+      "id": "3",
+      "name": "George Orwell",
+      "email": "orwell@1984.com"
+    },
+    {
+      "id": "4",
+      "name": "Jane Austen",
+      "email": "marquez@cemanos.com"
+    },
+    {
+      "id": "5",
+      "name": "Gabriel Márquez",
+      "email": "marquez@cemanos.com"
+    },
+    {
+      "id": "6",
+      "name": "Machado de Assis",
+      "email": "machado@literatura.com"
+    },
+    {
+      "id": "7",
+      "name": "J.K. Rowling",
+      "email": "jk@hogwarts.com"
+    },
+    {
+      "id": "4dbf",
+      "name": "Teste add ",
+      "email": "add@test.com"
+    },
+    {
+      "id": "53ba",
+      "name": "3565436453",
+      "email": "joaovictoralves552@gmail.com"
+    }
+  ],
+  "books": [
+    {
+      "id": "101",
+      "name": "Dom Casmurro",
+      "author_id": 1,
+      "pages": 256
+    },
+    {
+      "id": "102",
+      "name": "Memórias Póstumas de Brás Cubas",
+      "author_id": 1,
+      "pages": 210
+    },
+    {
+      "id": "103",
+      "name": "Harry Potter e a Pedra Filosofal",
+      "author_id": 2,
+      "pages": 309
+    },
+    {
+      "id": "104",
+      "name": "Harry Potter e o Prisioneiro de Azkaban",
+      "author_id": 2,
+      "pages": 328
+    },
+    {
+      "id": "105",
+      "name": "1984",
+      "author_id": 3,
+      "pages": 328
+    },
+    {
+      "id": "106",
+      "name": "A Revolução dos Bichos",
+      "author_id": 3,
+      "pages": 152
+    },
+    {
+      "id": "107",
+      "name": "Orgulho e Preconceito",
+      "author_id": 4,
+      "pages": 279
+    },
+    {
+      "id": "108",
+      "name": "Cem Anos de Solidão",
+      "author_id": 5,
+      "pages": 417
+    },
+    {
+      "id": "89b0",
+      "name": "monica",
+      "author_id": 1,
+      "pages": 123
+    },
+    {
+      "id": "6a03",
+      "name": "thai",
+      "author_id": 3,
+      "pages": 1231243123
+    },
+    {
+      "id": "7e5d",
+      "name": "123",
+      "author_id": 2,
+      "pages": 13
+    }
+  ]
+}
