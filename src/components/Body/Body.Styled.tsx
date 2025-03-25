@@ -18,14 +18,20 @@ export const Main = styled.div`
   display: flex;
   flex-direction: column;
   gap: 16px;
+
+  @media (max-width: 768px) {
+    width: 90%;
+  }
 `;
 
 export const Header = styled.div`
   display: flex;
   width: 100%;
   gap: 1rem;
-  flex-wrap: wrap;
   align-items: center;
+  @media (max-width: 330px) {
+    flex-wrap: wrap;
+  }
 `;
 
 export const Body = styled.div`
@@ -41,7 +47,7 @@ export const Button = styled.button`
   transition: 0.3s;
   font-size: 16px;
   display: flex;
-  align-items: baseline;
+  align-items: center;
   justify-content: center;
   gap: 6px;
   cursor: pointer;

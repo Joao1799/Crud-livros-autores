@@ -12,6 +12,7 @@ export const Body = ({ selectedScreen }: { selectedScreen: string }) => {
   const [modalType, setModalType] = useState<"add" | "search" | null>(null);
   const [openModalBook, setOpenModalBook] = useState<boolean>(false);
   const [openModalAuthor, setOpenModalAuthor] = useState<boolean>(false);
+  const [reloadTable, setReloadTable] = useState<boolean>(false);
   
   const modalAuthor = (type: "add" | "search") => {
     setModalType(type);
@@ -25,6 +26,10 @@ export const Body = ({ selectedScreen }: { selectedScreen: string }) => {
     setModalType(null);
   };
 
+  const refresTable = () => {
+    setReloadTable((aux) => !aux);
+  };
+
   return (
     <S.Section>
       <S.Main>
@@ -33,13 +38,13 @@ export const Body = ({ selectedScreen }: { selectedScreen: string }) => {
             <S.Title>Tabela de Livros</S.Title>
             <S.Header>
               <S.Button onClick={() => modalAuthor("add")}>
-                Adicionar Livro
                 <BiBookAdd />
+                Adicionar Livro
               </S.Button>
 
               <S.Button onClick={() => modalAuthor("search")}>
-                Pesquisar Livro
                 <FaSearch />
+                Pesquisar Livro
               </S.Button>
             </S.Header>
 
@@ -48,23 +53,25 @@ export const Body = ({ selectedScreen }: { selectedScreen: string }) => {
                 isOpen={openModalBook}
                 closeModal={closeModal}
                 modalType={modalType}
+                refreshBooks={refresTable}
               />
-              <BooksTable></BooksTable>
+              <BooksTable reloadTable={reloadTable}></BooksTable>
             </S.Body>
           </>
         )}
 
         {selectedScreen === "Autor" && (
           <>
-            <S.Title>Tabela de Autor</S.Title>
+            <S.Title>Tabela de Autores</S.Title>
             <S.Header>
               <S.Button onClick={() => modalAuthor("add")}>
-                Adicionar Autor <AiOutlineUserAdd />
+                <AiOutlineUserAdd />
+                Adicionar Autor(a)
               </S.Button>
 
               <S.Button onClick={() => modalAuthor("search")}>
-                Pesquisar Autor
                 <FaSearch />
+                Pesquisar Autores
               </S.Button>
             </S.Header>
 
@@ -73,8 +80,9 @@ export const Body = ({ selectedScreen }: { selectedScreen: string }) => {
                 isOpen={openModalAuthor}
                 closeModal={closeModal}
                 modalType={modalType}
+                refreshAuthors={refresTable}
               />
-              <AuthorTable />
+              <AuthorTable reloadTable={reloadTable}/>
             </S.Body>
           </>
         )}

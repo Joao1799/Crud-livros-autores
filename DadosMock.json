@@ -24,26 +24,6 @@
       "id": "5",
       "name": "Gabriel Márquez",
       "email": "marquez@cemanos.com"
-    },
-    {
-      "id": "6",
-      "name": "Machado de Assis",
-      "email": "machado@literatura.com"
-    },
-    {
-      "id": "7",
-      "name": "J.K. Rowling",
-      "email": "jk@hogwarts.com"
-    },
-    {
-      "id": "4dbf",
-      "name": "Teste add ",
-      "email": "add@test.com"
-    },
-    {
-      "id": "53ba",
-      "name": "3565436453",
-      "email": "joaovictoralves552@gmail.com"
     }
   ],
   "books": [
@@ -94,24 +74,6 @@
       "name": "Cem Anos de Solidão",
       "author_id": 5,
       "pages": 417
-    },
-    {
-      "id": "89b0",
-      "name": "monica",
-      "author_id": 1,
-      "pages": 123
-    },
-    {
-      "id": "6a03",
-      "name": "thai",
-      "author_id": 3,
-      "pages": 1231243123
-    },
-    {
-      "id": "7e5d",
-      "name": "123",
-      "author_id": 2,
-      "pages": 13
     }
   ]
 }

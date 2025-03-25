@@ -2,12 +2,12 @@ import { useEffect, useState } from "react";
 import { getBooks, Book, deleteBook } from "../../services/ServiceBook";
 import * as S from "./Table.Styled"
 
-export const BooksTable = () => {
+export const BooksTable = ({ reloadTable }: {reloadTable: boolean}) => {
   const [books, setBooks] = useState<Book[]>([]);
 
   useEffect(() => {
     getBooks().then(setBooks).catch(console.error);
-  }, []);
+  }, [reloadTable]);
 
   const Delete = async (id: number) => {
     try {

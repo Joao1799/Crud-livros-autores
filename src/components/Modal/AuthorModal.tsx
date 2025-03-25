@@ -1,18 +1,20 @@
+import { AiOutlineUserAdd } from "react-icons/ai";
 import { Author, createAuthor, getAuthorById, getAuthors } from "../../services/ServiceAuthor";
 import { Book, getBooks } from "../../services/ServiceBook";
 import * as S from "./Modal.Styled";
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
+import { useForm, Controller } from "react-hook-form";
 
 interface AuthorModal {
   isOpen: boolean;
   closeModal: () => void;
   modalType: "add" | "search" | null;
+  refreshAuthors: any;
 }
 
-export const AuthorModal = ({ isOpen, closeModal, modalType }: AuthorModal) => {
+export const AuthorModal = ({ isOpen, closeModal, modalType, refreshAuthors }: AuthorModal) => {
 
-  const [name, setName] = useState<string>("");
-  const [email, setEmail] = useState<string>("");
+  const {control, handleSubmit, setValue, reset } = useForm();
   const [authors, setAuthors] = useState<Author[]>([]);
   const [books, setBooks] = useState<Book[]>([]);
   const [selectedBooks, setSelectedBooks] = useState<Book[]>([]);
@@ -23,8 +25,15 @@ export const AuthorModal = ({ isOpen, closeModal, modalType }: AuthorModal) => {
     getBooks().then(setBooks).catch(console.error);
   }, []);
 
-  const handleAuthorSelect = async (e: React.ChangeEvent<HTMLSelectElement>) => {
-    const authorId = e.target.value;
+  useEffect(() => {
+    if (!isOpen) {
+      reset();
+      setSelectedAuthor(null);
+      setSelectedBooks([]);
+    }
+  }, [isOpen, reset]);
+
+  const handleAuthorSelect = async (authorId: string) => {
     if (authorId) {
       const author = await getAuthorById(authorId);
       setSelectedAuthor(author);
@@ -37,12 +46,13 @@ export const AuthorModal = ({ isOpen, closeModal, modalType }: AuthorModal) => {
     }
   };
 
-  const Submit = async (e: React.FormEvent) => {
-    e.preventDefault();
+
+  const Submit = async (data: any) => {
     try {
-      const newAuthor = await createAuthor(name, email);
+      const newAuthor = await createAuthor(data.name, data.email);
       alert(`Autor "${newAuthor.name}" criado com sucesso!`);
       closeModal();
+      refreshAuthors();
     } catch (error) {
       alert("Erro ao criar livro. Tente novamente.");
     }
@@ -58,62 +68,87 @@ export const AuthorModal = ({ isOpen, closeModal, modalType }: AuthorModal) => {
         <S.Container>
           <S.CloseButton onClick={closeModal}>×</S.CloseButton>
           <S.ModalTitle>
-            {modalType === "add" ? "Adicionar Autor" : "Pesquisar Autor"}
+            {modalType === "add" ? "Adicionar Autor(a)" : "Pesquisar Autores"}
           </S.ModalTitle>
           <S.ModalContent>
             {modalType === "add" ? (
-              <form onSubmit={Submit}>
+              <form onSubmit={handleSubmit(Submit)}>
                 <S.Article>
-                  <label>Nome do Autor:</label>
-                  <S.Input type="text" value={name}
-                    onChange={(e) => setName(e.target.value)}
-                    required />
+                  <label>Nome:</label>
+                  <Controller
+                    name="name"
+                    control={control}
+                    render={({ field }) => (
+                      <S.Input {...field} type="text" required />
+                    )}
+                  />
                 </S.Article>
 
                 <S.Article>
                   <label>Email:</label>
-                  <S.Input type="email" value={email} 
-                    onChange={(e) => setEmail(e.target.value)} required />
+                  <Controller
+                    name="email"
+                    control={control}
+                    render={({ field }) => (
+                      <S.Input {...field} type="email" required />
+                    )}
+                  />
                 </S.Article>
                 <S.footer>
-                  <S.ActionButton type="submit">Adicionar Autor</S.ActionButton>
+                  <S.ActionButton type="submit">
+                    <AiOutlineUserAdd />
+                    Adicionar Autor(a)
+                    </S.ActionButton>
                 </S.footer>
               </form>
             ) : (
               <>
                 <S.Article>
-                  <label>Autor:</label>
-                  <S.Select onChange={handleAuthorSelect} required>
-                  <option value="" disabled selected>Selecione um Autor</option>
-                    {authors.map((author) => (
-                      <option key={author.id} value={author.id}>
-                        {author.name}
-                      </option>
-                    ))}
-                  </S.Select>
+                  <label>Autor(a):</label>
+                  <Controller
+                    name="authorId"
+                    control={control}
+                    render={({ field }) => (
+                      <S.Select
+                        {...field}
+                        onChange={(e) => {setValue("authorId", e.target.value);
+                        handleAuthorSelect(e.target.value);}} required>
+                        <option value="" disabled selected>
+                          Selecione um Autor(a)
+                        </option>
+                        {authors.map((author) => (
+                          <option key={author.id} value={author.id}>
+                            {author.name}
+                          </option>
+                        ))}
+                      </S.Select>
+                    )}
+                  />
                 </S.Article>
+                {selectedBooks.length > 0 && (
                   <S.Article>
-                  <h3>Livros do Autor:</h3>
+                    <h3>Livros do Autor(a):</h3>
                     {selectedBooks.map((book) => (
-                      <div key={book.id}>
-                        <S.Article>
-                          <label>Nome do Livro:</label>
+                      <S.Div key={book.id}>
+                        <S.ArticleAux>
+                          <S.Label>Nome do Livro:</S.Label>
                           <p>{book.name}</p>
-                          <label>Páginas:</label>
+                          <S.Label>Páginas:</S.Label>
                           <p>{book.pages}</p>
-                        </S.Article>
-                      </div>
+                        </S.ArticleAux>
+                      </S.Div>
                     ))}
                   </S.Article>
+                )}
                 {selectedAuthor && (
                   <S.Article>
                     <h3>Informações do Autor</h3>
-                    <S.Article>
-                      <label>Nome:</label>
+                    <S.ArticleAux>
+                      <S.Label>Nome:</S.Label>
                       <p>{selectedAuthor.name}</p>
-                      <label>Email:</label>
+                      <S.Label>Email:</S.Label>
                       <p>{selectedAuthor.email}</p>
-                    </S.Article>
+                      </S.ArticleAux>
                   </S.Article>
                 )}
               </>

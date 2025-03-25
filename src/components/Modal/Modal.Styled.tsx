@@ -11,16 +11,38 @@ export const Overlay = styled.div`
   align-items: center;
   justify-content: center;
   z-index: 1000;
+  opacity: 0;
+  animation: fadeIn 0.5s forwards;
+  @keyframes fadeIn {
+      to {
+          opacity: 1;
+      }
+  }
 `;
 
 export const Container = styled.div`
   background: white;
   width: 400px;
   padding: 20px;
+  max-width: 500px;
+  overflow-y: auto;
   border-radius: 10px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   text-align: center;
   position: relative;
+  opacity: 0;
+  transform: scale(0.5);
+  animation: fadeInScale 0.5s forwards;
+  @keyframes fadeInScale {
+      to {
+          opacity: 1;
+          transform: scale(1);
+      }
+  }
+
+  @media (max-width: 768px) {
+    width: 60%;
+  }
 `;
 
 export const CloseButton = styled.button`
@@ -59,6 +81,29 @@ export const Article = styled.article`
   gap: 4px;
   margin-bottom: 4px;
 `
+
+export const Div = styled.div`
+  width: 100%;
+`
+
+export const ArticleAux = styled.article`
+  background-color: #c0bebef0;
+  display: flex;
+  width: 100%;
+  border-radius: 4px;
+  flex-direction: column;
+  align-items: start;
+  width: 100%;
+  gap: 4px;
+  margin-bottom: 4px;
+  text-align: start;
+  padding: 6px;  
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+`
+export const Label = styled.label`
+  font-weight: 700;
+`
+
 
 export const Input = styled.input`
     color: #334155;
@@ -108,6 +153,10 @@ export const ActionButton = styled.button`
   border: none;
   border-radius: 5px;
   cursor: pointer;
+  transition: .3s;
+  display: flex;
+  align-items: center;
+  gap: 4px;
 
   &:hover {
     background: #f39c12;

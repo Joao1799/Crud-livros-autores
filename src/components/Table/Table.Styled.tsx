@@ -4,16 +4,19 @@ import { FaRegTrashAlt } from "react-icons/fa";
 export const Container = styled.section`
   width: 100%;
   height: 100%;
+  overflow: hidden;
+  overflow-x: auto;
 `;
 
 export const Table = styled.table`
   width: 100%;
   height: 100%;
   background: #444;
-  color: #f39c12;
+  color: white;
   border-spacing: 0px;
   border-radius: 8px;
-  overflow: hidden;
+  border-collapse: collapse;
+  text-wrap:nowrap;
 `;
 
 export const Thead = styled.thead`

@@ -2,12 +2,12 @@ import { useEffect, useState } from "react";
 import { getAuthors, Author, deleteAuthor } from "../../services/ServiceAuthor";
 import * as S from "./Table.Styled";
 
-export const AuthorTable = () => {
+export const AuthorTable = ({reloadTable}:{reloadTable: boolean}) => {
   const [author, setAuthor] = useState<Author[]>([]);
 
   useEffect(() => {
     getAuthors().then(setAuthor).catch(console.error);
-  }, []);
+  },[reloadTable]);
 
   const Delete = async (id: number) => {
     try {

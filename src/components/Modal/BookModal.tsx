@@ -1,18 +1,20 @@
+import { BiBookAdd } from "react-icons/bi";
 import { Author, getAuthorById, getAuthors } from "../../services/ServiceAuthor";
 import { Book, createBook, getBookById, getBooks } from "../../services/ServiceBook";
 import * as S from "./Modal.Styled";
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
+import { useForm, Controller } from "react-hook-form";
 
 interface BookModal {
   isOpen: boolean;
   closeModal: () => void;
   modalType: "add" | "search" | null;
+  refreshBooks: any;
 }
-export const BookModal = ({ isOpen, closeModal, modalType }: BookModal) => {
+export const BookModal = ({ isOpen, closeModal, modalType, refreshBooks  }: BookModal) => {
   
-  const [name, setName] = useState<string>("");
-  const [authorId, setAuthorId] = useState<number | string>("");
-  const [pages, setPages] = useState<number | string>("");
+  const { control, handleSubmit, setValue, reset } = useForm();
+
   const [authors, setAuthors] = useState<Author[]>([]);
   const [books, setBooks] = useState<Book[]>([]);
   const [selectedBook, setSelectedBook] = useState<Book | null>(null);
@@ -23,8 +25,15 @@ export const BookModal = ({ isOpen, closeModal, modalType }: BookModal) => {
     getBooks().then(setBooks).catch(console.error);
   }, []);
 
-  const handleBookSelect = async (e: React.ChangeEvent<HTMLSelectElement>) => {
-    const bookId = e.target.value;
+  useEffect(() => {
+    if (!isOpen) {
+      reset();
+      setSelectedAuthor(null);
+      setSelectedBook(null);
+    }
+  }, [isOpen, reset]);
+
+  const handleBookSelect = async (bookId: string) => {
     if (bookId) {
       const book = await getBookById(bookId);
       setSelectedBook(book);
@@ -33,12 +42,12 @@ export const BookModal = ({ isOpen, closeModal, modalType }: BookModal) => {
     }
   };
 
-  const Submit = async (e: React.FormEvent) => {
-    e.preventDefault();
+  const Submit = async (data: any) => {
     try {
-      const newBook = await createBook(name, Number(authorId), Number(pages));
+      const newBook = await createBook(data.name, Number(data.authorId), Number(data.pages));
       alert(`Livro "${newBook.name}" criado com sucesso!`);
       closeModal();
+      refreshBooks();
     } catch (error) {
       alert("Erro ao criar livro. Tente novamente.");
     }
@@ -58,72 +67,96 @@ export const BookModal = ({ isOpen, closeModal, modalType }: BookModal) => {
           </S.ModalTitle>
           <S.ModalContent>
             {modalType === "add" ? (
-                  <form onSubmit={Submit}>
-                    <S.Article>
-                      <label>Nome do Livro:</label>
-                      <S.Input type="text" value={name}
-                        onChange={(e) => setName(e.target.value)}
-                        required />
-                    </S.Article>
-                    <S.Article>
-                      <label>Autor:</label>
-                      <S.Select value={authorId}
-                        onChange={(e) => setAuthorId(e.target.value)}
-                        required >
-                        <option value="" disabled selected>Selecione um Autor</option>
+              <form onSubmit={handleSubmit(Submit)}>
+                <S.Article>
+                  <label>Nome do Livro:</label>
+                  <Controller
+                    name="name"
+                    control={control}
+                    render={({ field }) => (
+                      <S.Input {...field} type="text" required />
+                    )}
+                  />
+                </S.Article>
+                <S.Article>
+                  <label>Autor(a):</label>
+                  <Controller
+                    name="authorId"
+                    control={control}
+                    render={({ field }) => (
+                      <S.Select {...field} onChange={(e) => setValue("authorId", e.target.value)} required>
+                        <option value="" disabled selected>
+                          Selecione um Autor
+                        </option>
                         {authors.map((author) => (
                           <option key={author.id} value={author.id}>
                             {author.name}
                           </option>
                         ))}
                       </S.Select>
-                    </S.Article>
-                    <S.Article>
-                      <label>N° de Páginas:</label>
-                      <S.Input type="number" value={pages}
-                        onChange={(e) => setPages(e.target.value)} />
-                    </S.Article>
-                    <S.footer>
-                    <S.ActionButton type="submit">Adicionar Livro</S.ActionButton>
-                    </S.footer>
-                  </form>
+                    )}
+                  />
+                </S.Article>
+                <S.Article>
+                  <label>N° de Páginas:</label>
+                  <Controller
+                    name="pages"
+                    control={control}
+                    render={({ field }) => (
+                      <S.Input {...field} type="number" />
+                    )}
+                  />
+                </S.Article>
+                <S.footer>
+                  <S.ActionButton type="submit">
+                    <BiBookAdd />
+                    Adicionar Livro
+                    </S.ActionButton>
+                </S.footer>
+              </form>
             ) : (
               <>
                 <S.Article>
-                      <label>Nome do Livro:</label>
-                      <S.Select 
-                        onChange={handleBookSelect}
-                        required >
-                        <option value="" disabled selected>Selecione um Livro</option>
-                        {books.map((books) => (
-                          <option key={books.id} value={books.id}>
-                            {books.name}
+                  <label>Nome do Livro:</label>
+                  <Controller
+                    name="bookId"
+                    control={control}
+                    render={({ field }) => (
+                      <S.Select {...field} onChange={(e) => handleBookSelect(e.target.value)} required>
+                        <option value="" disabled selected> 
+                          Selecione um Livro
+                        </option>
+                        {books.map((book) => (
+                          <option key={book.id} value={book.id}>
+                            {book.name}
                           </option>
                         ))}
                       </S.Select>
-                    </S.Article>
-                    {selectedBook && (
+                    )}
+                  />
+                </S.Article>
+                {selectedBook && (
+                  <S.Article>
+                    <h3>Informações do Livro</h3>
+                    <S.ArticleAux>
+                      <S.Label>Nome:</S.Label>
+                      <p>{selectedBook.name}</p>
+                      <S.Label>N° de Páginas:</S.Label>
+                      <p>{selectedBook.pages}</p>
+                    </S.ArticleAux>
+                    {selectedAuthor && (
                       <S.Article>
-                        <h3>Informações do Livro</h3>
-                        <S.Article> 
-                        <label>Nome:</label>
-                        <p>{selectedBook.name}</p>
-                        <label>Páginas:</label>
-                        <p>{selectedBook.pages}</p>
-                        </S.Article>
-                        {selectedAuthor && (
-                          <S.Article>
-                            <h3>Autor do Livro</h3>
-                            <S.Article>
-                            <label>Nome:</label>
-                            <p>{selectedAuthor.name}</p>
-                            <label>Email:</label>
-                            <p>{selectedAuthor.email}</p>
-                            </S.Article>
-                          </S.Article>
-                        )}
+                        <h3>Autor(a) do Livro</h3>
+                        <S.ArticleAux>
+                          <S.Label>Nome:</S.Label>
+                          <p>{selectedAuthor.name}</p>
+                          <S.Label>Email:</S.Label>
+                          <p>{selectedAuthor.email}</p>
+                        </S.ArticleAux>
                       </S.Article>
                     )}
+                  </S.Article>
+                )}
               </>
             )}
           </S.ModalContent>
