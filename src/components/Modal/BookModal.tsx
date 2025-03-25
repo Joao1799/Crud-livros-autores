@@ -61,10 +61,14 @@ export const BookModal = ({ isOpen, closeModal, modalType, refreshBooks  }: Book
     <>
       <S.Overlay>
         <S.Container>
-          <S.CloseButton onClick={closeModal}>×</S.CloseButton>
-          <S.ModalTitle>
-            {modalType === "add" ? "Adicionar Livro" : "Pesquisar Livro"}
-          </S.ModalTitle>
+          <S.Header>
+            <S.ArticleTitle>
+              <S.ModalTitle>
+                {modalType === "add" ? "Adicionar Livro" : "Pesquisar Livro"}
+              </S.ModalTitle>
+            </S.ArticleTitle>
+            <S.CloseButton onClick={closeModal}>×</S.CloseButton>
+          </S.Header>
           <S.ModalContent>
             {modalType === "add" ? (
               <form onSubmit={handleSubmit(Submit)}>

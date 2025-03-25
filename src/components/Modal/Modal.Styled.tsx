@@ -41,23 +41,35 @@ export const Container = styled.div`
   }
 
   @media (max-width: 768px) {
-    width: 60%;
+    width: 80%;
   }
 `;
 
+export const Header = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: baseline;
+  width: 100%;
+`
+
+export const ArticleTitle = styled.article`
+  display: flex;
+  align-items: center;
+  width: 100%;
+  justify-content: center;
+`
+
 export const CloseButton = styled.button`
-  position: absolute;
-  top: 10px;
-  right: 10px;
   background: none;
   border: none;
-  font-size: 18px;
+  font-size: 24px;
   cursor: pointer;
   color: #333;
-  padding: 0.745rem;
-
+  transition: .2s;
   &:hover {
     color: red;
+    transform: scale(1.2);
   }
 `;
 

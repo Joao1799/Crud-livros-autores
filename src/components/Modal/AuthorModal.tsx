@@ -66,10 +66,14 @@ export const AuthorModal = ({ isOpen, closeModal, modalType, refreshAuthors }: A
     <>
       <S.Overlay>
         <S.Container>
-          <S.CloseButton onClick={closeModal}>×</S.CloseButton>
-          <S.ModalTitle>
+          <S.Header>
+            <S.ArticleTitle>
+              <S.ModalTitle>
             {modalType === "add" ? "Adicionar Autor(a)" : "Pesquisar Autores"}
-          </S.ModalTitle>
+              </S.ModalTitle>
+            </S.ArticleTitle>
+            <S.CloseButton onClick={closeModal}>×</S.CloseButton>
+          </S.Header>
           <S.ModalContent>
             {modalType === "add" ? (
               <form onSubmit={handleSubmit(Submit)}>

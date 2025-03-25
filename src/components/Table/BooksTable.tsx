@@ -4,9 +4,11 @@ import * as S from "./Table.Styled"
 
 export const BooksTable = ({ reloadTable }: {reloadTable: boolean}) => {
   const [books, setBooks] = useState<Book[]>([]);
+  const [isLoading, setIsLoading] = useState<boolean>(true);
 
   useEffect(() => {
-    getBooks().then(setBooks).catch(console.error);
+    getBooks().then(setBooks).catch(console.error)
+    .finally(() => setIsLoading(false));
   }, [reloadTable]);
 
   const Delete = async (id: number) => {
@@ -21,7 +23,13 @@ export const BooksTable = ({ reloadTable }: {reloadTable: boolean}) => {
 
   return (
     <S.Container>
+      {isLoading && (
+        <S.LoadingOverlay>
+          <S.Spinner />
+        </S.LoadingOverlay>
+      )}          
       <S.Table>
+      {books.length > 0 && (  
         <S.Thead>
           <S.Tr>
             <S.Th>ID Livro:</S.Th>
@@ -30,6 +38,7 @@ export const BooksTable = ({ reloadTable }: {reloadTable: boolean}) => {
             <S.Th></S.Th>
           </S.Tr>
         </S.Thead>
+      )}  
         {books.map((books) => (
           <S.Tbody key={books.id}>
             <S.Tr>

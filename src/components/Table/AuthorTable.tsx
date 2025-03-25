@@ -4,9 +4,12 @@ import * as S from "./Table.Styled";
 
 export const AuthorTable = ({reloadTable}:{reloadTable: boolean}) => {
   const [author, setAuthor] = useState<Author[]>([]);
+  const [isLoading, setIsLoading] = useState<boolean>(true);
 
   useEffect(() => {
-    getAuthors().then(setAuthor).catch(console.error);
+    setIsLoading(true);
+    getAuthors().then(setAuthor).catch(console.error)
+    .finally(() => setIsLoading(false));
   },[reloadTable]);
 
   const Delete = async (id: number) => {
@@ -21,7 +24,13 @@ export const AuthorTable = ({reloadTable}:{reloadTable: boolean}) => {
 
   return (
     <S.Container>
+      {isLoading && (
+        <S.LoadingOverlay>
+          <S.Spinner />
+        </S.LoadingOverlay>
+      )}      
       <S.Table>
+      {author.length > 0 && (
         <S.Thead>
           <S.Tr>
             <S.Th>ID Autor:</S.Th>
@@ -30,6 +39,7 @@ export const AuthorTable = ({reloadTable}:{reloadTable: boolean}) => {
             <S.Th></S.Th>
           </S.Tr>
         </S.Thead>
+      )}  
         {author.map((author) => (
           <S.Tbody key={author.id}>
             <S.Tr>

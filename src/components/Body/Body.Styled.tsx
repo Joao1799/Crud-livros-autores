@@ -21,6 +21,7 @@ export const Main = styled.div`
 
   @media (max-width: 768px) {
     width: 90%;
+    height: 80vh;
   }
 `;
 
