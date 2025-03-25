@@ -10,7 +10,7 @@ export const Section = styled.section`
 
 export const Main = styled.div`
   width: 70%;
-  height: 90%;
+  height: 80vh;
   padding: 2rem;
   background-color: #222;
   box-shadow: 2px 0 10px rgba(0, 0, 0, 0.3);
@@ -18,6 +18,7 @@ export const Main = styled.div`
   display: flex;
   flex-direction: column;
   gap: 16px;
+  overflow: hidden;
 
   @media (max-width: 768px) {
     width: 90%;
@@ -39,6 +40,7 @@ export const Body = styled.div`
   height: 100%;
   display: flex;
   flex-direction: row;
+  overflow: hidden;
 `;
 
 export const Button = styled.button`
@@ -55,6 +57,15 @@ export const Button = styled.button`
 
   &:hover {
     background: #f39c12;
+  }
+
+  @media (max-width: 768px) {
+    font-size: 14px;
+    width: 100%;
+  }
+
+  @media (max-width: 485px) {
+    text-align: start;
   }
 `;
 

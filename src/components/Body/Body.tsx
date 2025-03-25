@@ -5,8 +5,8 @@ import { AuthorModal } from "../Modal/AuthorModal";
 import { AuthorTable } from "../Table/AuthorTable";
 import { FaSearch } from "react-icons/fa";
 import { AiOutlineUserAdd } from "react-icons/ai";
-import { BiBookAdd } from "react-icons/bi";
 import { BooksTable } from "../Table/BooksTable";
+import { FaBook } from 'react-icons/fa';
 
 export const Body = ({ selectedScreen }: { selectedScreen: string }) => {
   const [modalType, setModalType] = useState<"add" | "search" | null>(null);
@@ -38,12 +38,12 @@ export const Body = ({ selectedScreen }: { selectedScreen: string }) => {
             <S.Title>Tabela de Livros</S.Title>
             <S.Header>
               <S.Button onClick={() => modalAuthor("add")}>
-                <BiBookAdd />
+                <FaBook size={24} color="black" />
                 Adicionar Livro
               </S.Button>
 
               <S.Button onClick={() => modalAuthor("search")}>
-                <FaSearch />
+                <FaSearch size={24} color="black"/>
                 Pesquisar Livro
               </S.Button>
             </S.Header>
@@ -65,12 +65,12 @@ export const Body = ({ selectedScreen }: { selectedScreen: string }) => {
             <S.Title>Tabela de Autores</S.Title>
             <S.Header>
               <S.Button onClick={() => modalAuthor("add")}>
-                <AiOutlineUserAdd />
+                <AiOutlineUserAdd size={24} color="black"/>
                 Adicionar Autor(a)
               </S.Button>
 
               <S.Button onClick={() => modalAuthor("search")}>
-                <FaSearch />
+                <FaSearch size={24} color="black"/>
                 Pesquisar Autores
               </S.Button>
             </S.Header>

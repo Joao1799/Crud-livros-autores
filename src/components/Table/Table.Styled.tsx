@@ -4,8 +4,8 @@ import { FaRegTrashAlt } from "react-icons/fa";
 export const Container = styled.section`
   width: 100%;
   height: 100%;
-  overflow: hidden;
-  overflow-x: auto;
+  overflow-y:auto ;
+  overflow-x: auto; 
 `;
 
 export const spin = keyframes`
@@ -37,14 +37,13 @@ export const Spinner = styled.div`
 
 export const Table = styled.table`
   width: 100%;
-  height: 100%;
   background: #444;
   color: white;
   border-spacing: 0px;
   border-radius: 8px;
   border-collapse: collapse;
   text-wrap:nowrap;
-  /* overflow-y: auto; */
+
 `;
 
 export const Thead = styled.thead`
@@ -59,15 +58,19 @@ export const Tr = styled.tr`
 export const Th = styled.th`
   text-align: left;
   padding: 0.75rem 1rem;
+  height: 80px;
   border: 1px solid #b9bec4;
   border-width: 0 0 1px 0;
 `;
 
-export const Tbody = styled.tbody``;
+export const Tbody = styled.tbody`
+
+`
 
 export const Td = styled.td`
   text-align: left;
   padding: 0.15rem 1rem;
+  height: 80px;
 `;
 
 export const DeleteIcon = styled(FaRegTrashAlt)`
