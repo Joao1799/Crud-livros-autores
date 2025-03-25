@@ -184,6 +184,7 @@ Error generating stack: `+l.message+`
   justify-content: center;
   gap: 6px;
   cursor: pointer;
+  color: black;
 
   &:hover {
     background: #f39c12;
