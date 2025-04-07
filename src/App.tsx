@@ -3,11 +3,12 @@ import { SideBar } from './components/SideBar/SideBar'
 import { Loading } from './components/Loading/Loading';
 import { Body } from './components/Body/Body'
 import './App.css'
+import { Login } from './components/Login/Login';
 
 export const App = () => {
   const [selectedScreen, setSelectedScreen] = useState<string>("Autor");
-
   const [isLoading, setIsLoading] = useState<boolean>(true);
+  const [isAuthenticated, setIsAuthenticated] = useState<boolean>(false)
 
   useEffect(() => {
     const loadData = () => {
@@ -18,9 +19,17 @@ export const App = () => {
     loadData();
   }, []);
 
+  const handleLogin = () => {
+    setIsAuthenticated(true);
+    localStorage.setItem('isAuthenticated', 'true');
+  };
+
+  if (isLoading) return <Loading />
+
+  if (!isAuthenticated) return <Login onLogin={handleLogin} />
+
   return (
     <>
-    {isLoading ? <Loading /> : (
     <div className="container">
       <div className="sidebar">
         <SideBar setSelectedScreen={setSelectedScreen}/>
@@ -30,7 +39,6 @@ export const App = () => {
         <Body selectedScreen={selectedScreen}/>
       </div>
     </div>
-    )}
     </>
   )
 };
