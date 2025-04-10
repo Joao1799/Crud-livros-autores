@@ -1,4 +1,4 @@
-const API_URL = "https://crud-livros-autores.onrender.com";
+const API_URL = "http://localhost:3001";
 
 export interface Book {
   id: number;
@@ -23,7 +23,7 @@ export const getBookById = async (id: number | string ): Promise<Book> => {
   return response.json();
 };
 
-export const createBook = async (name: string, author_id: number, pages?: number): Promise<Book> => {
+export const createBook = async (name: string, author_id: string , pages?: number): Promise<Book> => {
   const response = await fetch(`${API_URL}/books`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },

@@ -1,4 +1,4 @@
-const API_URL = "https://crud-livros-autores.onrender.com";
+const API_URL = "http://localhost:3001";
 
 export interface Author {
   id: number;

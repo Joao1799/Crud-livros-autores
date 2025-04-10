@@ -44,7 +44,7 @@ export const BookModal = ({ isOpen, closeModal, modalType, refreshBooks  }: Book
 
   const Submit = async (data: any) => {
     try {
-      const newBook = await createBook(data.name, Number(data.authorId), Number(data.pages));
+      const newBook = await createBook(data.name, data.authorId, Number(data.pages));
       alert(`Livro "${newBook.name}" criado com sucesso!`);
       closeModal();
       refreshBooks();
