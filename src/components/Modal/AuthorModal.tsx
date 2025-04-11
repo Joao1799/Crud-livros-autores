@@ -38,7 +38,7 @@ export const AuthorModal = ({ isOpen, closeModal, modalType, refreshAuthors }: A
       const author = await getAuthorById(authorId);
       setSelectedAuthor(author);
 
-      const filteredBooks = books.filter((book) => book.author_id === Number(authorId));
+      const filteredBooks = books.filter((book) => book.author_id === authorId);
       setSelectedBooks(filteredBooks);
     } else {
       setSelectedAuthor(null);

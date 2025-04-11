@@ -42,11 +42,6 @@ export const postRegister = async (data: RegisterData): Promise<RegisterData> =>
     body: JSON.stringify(data),
   });
 
-  const contentType = response.headers.get("content-type");
-
-  if (!contentType?.includes("application/json")) {
-    const text = await response.text();
-  }
   const json = await response.json();
   if (!response.ok) {
     throw new Error(`Erro ao registrar: ${JSON.stringify(json)}`);

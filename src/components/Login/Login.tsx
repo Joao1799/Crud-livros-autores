@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { postLogin } from "../../services/Login";
 import * as S from "./Login.Styled";
+import * as So from "../Table/Table.Styled";
 
 interface LoginProps {
   onLogin: () => void;
@@ -12,9 +13,12 @@ export const Login = ({ onLogin }: LoginProps) => {
   const [nome, setNome] = useState('');
   const [email, setEmail] = useState('');
   const [error, setError] = useState<string | null>(null);
+  const [loading, setLoading] = useState(false);
 
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
+    setLoading(true);
+    setError(null);
     try {
       const response = await postLogin({ email, senha });
       if (response && response.user.email) {
@@ -25,12 +29,15 @@ export const Login = ({ onLogin }: LoginProps) => {
     } catch (err) {
       console.error(err);
       setError("Erro ao tentar fazer login.");
+    }finally {
+      setLoading(false); 
     }
   };
 
   const handleRegister = async (e: React.FormEvent) => {
     e.preventDefault();
-  
+    setLoading(true);
+    setError(null);
     try {
       const loginResp = await postLogin({ email, senha });
       if (loginResp && loginResp.user && loginResp.user.name && loginResp.user.email) {
@@ -42,11 +49,18 @@ export const Login = ({ onLogin }: LoginProps) => {
     } catch (err: any) {
       console.error("Erro no processo de registro/login:", err);
       setError(err.message || "Erro ao tentar registrar.");
+    } finally {
+      setLoading(false);
     }
   };
 
   return (
     <S.Container>
+      {loading && (
+        <So.LoadingOverlay>
+          <So.Spinner />
+        </So.LoadingOverlay>
+      )}  
       <S.boxLogin>
         <S.Header>
           <p>{isRegistering ? "Crie sua conta!" : "Seja Bem-Vindo!"}</p>
