@@ -1,17 +1,20 @@
 import { useEffect, useState } from "react";
 import { getBooks, Book, deleteBook } from "../../services/ServiceBook";
 import * as S from "./Table.Styled"
+import { EditBookModal } from "../Modal/EditModal";
 
 export const BooksTable = ({ reloadTable }: {reloadTable: boolean}) => {
   const [books, setBooks] = useState<Book[]>([]);
   const [isLoading, setIsLoading] = useState<boolean>(true);
+  const [selectedBookId, setSelectedBookId] = useState<string | null>(null);
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   useEffect(() => {
     getBooks().then(setBooks).catch(console.error)
     .finally(() => setIsLoading(false));
   }, [reloadTable]);
 
-  const Delete = async (id: number) => {
+  const Delete = async (id: string) => {
     try {
       await deleteBook(id);
       alert(`Livro deletado com sucesso!`);
@@ -42,9 +45,15 @@ export const BooksTable = ({ reloadTable }: {reloadTable: boolean}) => {
         {books.map((books) => (
           <S.Tbody key={books.id}>
             <S.Tr>
-              <S.Td style={{ textAlign: "right", width: `10%`,border: "1px solid #e2e8f0",borderWidth: "0 1px 0 0", }}>
+              <S.TdEdit
+                style={{ textAlign: "right", width: "10%", border: "1px solid #e2e8f0", borderWidth: "0 1px 0 0", cursor: "pointer" }}
+                onClick={() => {
+                  setSelectedBookId(books.id);
+                  setIsModalOpen(true);
+                }}
+              >
                 {books.id}
-              </S.Td>
+              </S.TdEdit>
               <S.Td style={{border: "1px solid #e2e8f0",borderWidth: "0 1px 0 0",}}>
                 {books.name}
               </S.Td>
@@ -54,6 +63,16 @@ export const BooksTable = ({ reloadTable }: {reloadTable: boolean}) => {
           </S.Tbody>
         ))}
       </S.Table>
+      {isModalOpen && selectedBookId !== null && (
+      <EditBookModal
+        bookId={selectedBookId}
+        onClose={() => setIsModalOpen(false)}
+        onSave={() => {
+          setIsLoading(true);
+          getBooks().then(setBooks).finally(() => setIsLoading(false));
+        }}
+      />
+    )}
     </S.Container>
   );
 };

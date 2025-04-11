@@ -1,9 +1,9 @@
-const API_URL = "http://localhost:3001";
+const API_URL = "https://api-livrosautores.onrender.com";
 
 export interface Author {
-  id: number;
+  id: string;
   name: string;
-  email?: string;
+  email?: any;
 }
 
 export const getAuthors = async (): Promise<Author[]> => {
@@ -15,6 +15,18 @@ export const getAuthorById = async (id: any): Promise<Author> => {
   const response = await fetch(`${API_URL}/authors/${id}`);
   return response.json();
 };
+
+export const updateAuthor = async (id: string, updatedAuthor: Author): Promise<Author> => {
+  const response = await fetch(`${API_URL}/authors/${id}`, {
+    method: "PUT",
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify(updatedAuthor)
+  });
+  return response.json();
+};
+
 
 export const createAuthor = async (name: string, email: string): Promise<Author> => {
   const response = await fetch(`${API_URL}/authors`, {
@@ -29,6 +41,6 @@ export const createAuthor = async (name: string, email: string): Promise<Author>
 };
 
 
-export const deleteAuthor = async (id: number): Promise<void> => {
+export const deleteAuthor = async (id: string): Promise<void> => {
   await fetch(`${API_URL}/authors/${id}`, { method: "DELETE" });
 };

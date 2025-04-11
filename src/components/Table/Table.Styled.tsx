@@ -73,6 +73,18 @@ export const Td = styled.td`
   height: 80px;
 `;
 
+export const TdEdit = styled.td`
+  text-align: left;
+  padding: 0.15rem 1rem;
+  height: 80px;
+  transition: .2s;
+
+  &:hover {
+  transform: scale(1.05);
+  color: #f39c12;
+  }
+`;
+
 export const DeleteIcon = styled(FaRegTrashAlt)`
   cursor: pointer;
   &:hover {

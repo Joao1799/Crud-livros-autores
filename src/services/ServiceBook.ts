@@ -1,9 +1,9 @@
-const API_URL = "http://localhost:3001";
+const API_URL = "https://api-livrosautores.onrender.com";
 
 export interface Book {
-  id: number;
+  id: string;
   name: string;
-  author_id: number;
+  author_id: string;
   pages?: number;
 }
 
@@ -18,8 +18,19 @@ export const getBooks = async (): Promise<Book[]> => {
   return response.json();
 };
 
-export const getBookById = async (id: number | string ): Promise<Book> => {
+export const getBookById = async (id: number | string ): Promise<any> => {
   const response = await fetch(`${API_URL}/books/${id}`);
+  return response.json();
+};
+
+export const updateBook = async (id: string, updatedBook: Book): Promise<Book> => {
+  const response = await fetch(`${API_URL}/books/${id}`, {
+    method: "PUT",
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify(updatedBook)
+  });
   return response.json();
 };
 
@@ -36,6 +47,6 @@ export const createBook = async (name: string, author_id: string , pages?: numbe
   return response.json();
 };
 
-export const deleteBook = async (id: number): Promise<void> => {
+export const deleteBook = async (id: string): Promise<void> => {
   await fetch(`${API_URL}/books/${id}`, { method: "DELETE" });
 };
