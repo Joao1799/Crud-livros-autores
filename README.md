@@ -1,6 +1,6 @@
 # 📚 CRUD de Livros e Autores
 
-Este projeto é um desafio de front-end para desenvolver um **CRUD de livros e autores** utilizando React, Vite e TypeScript. O sistema permite a criação, visualização e exclusão de livros e autores. Ele utiliza o **JSON-Server** para simular uma API RESTful e armazena os dados em um arquivo JSON mockado (`DadosMock.json`).
+Este projeto de front-end para desenvolver um **CRUD de livros e autores** utilizando React, Vite e TypeScript. O sistema permite a criação, visualização e exclusão de livros e autores. Ele utiliza o **JSON-Server** para simular uma API RESTful e armazena os dados em um arquivo JSON mockado (`DadosMock.json`).
 
 ---
 

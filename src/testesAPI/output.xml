@@ -1,0 +1,250 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<robot generator="Robot 7.3 (Python 3.12.4 on win32)" generated="2025-06-12T20:26:06.274793" rpa="false" schemaversion="5">
+<suite id="s1" name="Locators" source="D:\Downloads\Faculdade\Python\teste de soft\testesAPIJOAO\locators.robot">
+<kw name="Abrir Site" type="SETUP">
+<kw name="Open Browser" owner="SeleniumLibrary">
+<msg time="2025-06-12T20:26:06.658171" level="INFO">Opening browser 'firefox' to base url 'https://joao1799.github.io/Crud-livros-autores/'.</msg>
+<arg>${URL}</arg>
+<arg>${BROWSER}</arg>
+<doc>Opens a new browser instance to the optional ``url``.</doc>
+<status status="PASS" start="2025-06-12T20:26:06.658171" elapsed="7.104408"/>
+</kw>
+<kw name="Maximize Browser Window" owner="SeleniumLibrary">
+<doc>Maximizes current browser window.</doc>
+<status status="PASS" start="2025-06-12T20:26:13.762579" elapsed="0.262997"/>
+</kw>
+<kw name="Wait Until Page Contains" owner="SeleniumLibrary">
+<arg>Login</arg>
+<doc>Waits until ``text`` appears on the current page.</doc>
+<status status="PASS" start="2025-06-12T20:26:14.026575" elapsed="2.450504"/>
+</kw>
+<status status="PASS" start="2025-06-12T20:26:06.657146" elapsed="9.819933"/>
+</kw>
+<test id="s1-t1" name="Fazer login" line="17">
+<kw name="Input Text" owner="SeleniumLibrary">
+<msg time="2025-06-12T20:26:16.478076" level="INFO">Typing text 'asdf@asdf.com' into text field 'xpath=//input[@placeholder='Seu email...']'.</msg>
+<arg>xpath=//input[@placeholder='Seu email...']</arg>
+<arg>asdf@asdf.com</arg>
+<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
+<status status="PASS" start="2025-06-12T20:26:16.478076" elapsed="0.073064"/>
+</kw>
+<kw name="Input Text" owner="SeleniumLibrary">
+<msg time="2025-06-12T20:26:16.551140" level="INFO">Typing text 'asdf' into text field 'xpath=//input[@placeholder='Senha...']'.</msg>
+<arg>xpath=//input[@placeholder='Senha...']</arg>
+<arg>asdf</arg>
+<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
+<status status="PASS" start="2025-06-12T20:26:16.551140" elapsed="0.018948"/>
+</kw>
+<kw name="Click Button" owner="SeleniumLibrary">
+<msg time="2025-06-12T20:26:16.570088" level="INFO">Clicking button 'xpath=//button[normalize-space(text())='Entrar']'.</msg>
+<arg>xpath=//button[normalize-space(text())='Entrar']</arg>
+<doc>Clicks the button identified by ``locator``.</doc>
+<status status="PASS" start="2025-06-12T20:26:16.570088" elapsed="0.238336"/>
+</kw>
+<kw name="Wait Until Page Contains" owner="SeleniumLibrary">
+<arg>Nome Autor</arg>
+<doc>Waits until ``text`` appears on the current page.</doc>
+<status status="PASS" start="2025-06-12T20:26:16.808424" elapsed="1.423729"/>
+</kw>
+<status status="PASS" start="2025-06-12T20:26:16.477079" elapsed="1.756074"/>
+</test>
+<test id="s1-t2" name="Pesquisar um Autor" line="23">
+<kw name="Click Button" owner="SeleniumLibrary">
+<msg time="2025-06-12T20:26:18.234151" level="INFO">Clicking button 'xpath=//button[normalize-space(.)='Pesquisar Autores']'.</msg>
+<arg>xpath=//button[normalize-space(.)='Pesquisar Autores']</arg>
+<doc>Clicks the button identified by ``locator``.</doc>
+<status status="PASS" start="2025-06-12T20:26:18.234151" elapsed="0.225750"/>
+</kw>
+<kw name="Wait Until Element Is Visible" owner="SeleniumLibrary">
+<arg>xpath=//select[@name='authorId']</arg>
+<arg>5s</arg>
+<doc>Waits until the element ``locator`` is visible.</doc>
+<status status="PASS" start="2025-06-12T20:26:18.460901" elapsed="0.011297"/>
+</kw>
+<kw name="Select From List By Label" owner="SeleniumLibrary">
+<msg time="2025-06-12T20:26:18.473223" level="INFO">Selecting options from selection list 'xpath=//select[@name='authorId']' by label lucas teste.</msg>
+<arg>xpath=//select[@name='authorId']</arg>
+<arg>lucas teste</arg>
+<doc>Selects options from selection list ``locator`` by ``labels``.</doc>
+<status status="PASS" start="2025-06-12T20:26:18.472198" elapsed="0.240791"/>
+</kw>
+<kw name="Wait Until Page Contains" owner="SeleniumLibrary">
+<arg>Livros do Autor(a)</arg>
+<doc>Waits until ``text`` appears on the current page.</doc>
+<status status="PASS" start="2025-06-12T20:26:18.714017" elapsed="0.408346"/>
+</kw>
+<kw name="Click Button" owner="SeleniumLibrary">
+<msg time="2025-06-12T20:26:19.122363" level="INFO">Clicking button 'xpath=//button[normalize-space(.)='×']'.</msg>
+<arg>xpath=//button[normalize-space(.)='×']</arg>
+<doc>Clicks the button identified by ``locator``.</doc>
+<status status="PASS" start="2025-06-12T20:26:19.122363" elapsed="0.220314"/>
+</kw>
+<status status="PASS" start="2025-06-12T20:26:18.234151" elapsed="1.109450"/>
+</test>
+<test id="s1-t3" name="Criar um Autor" line="32">
+<kw name="Click Button" owner="SeleniumLibrary">
+<msg time="2025-06-12T20:26:19.345595" level="INFO">Clicking button 'xpath=//button[normalize-space(.)='Adicionar Autor(a)']'.</msg>
+<arg>xpath=//button[normalize-space(.)='Adicionar Autor(a)']</arg>
+<doc>Clicks the button identified by ``locator``.</doc>
+<status status="PASS" start="2025-06-12T20:26:19.345595" elapsed="0.221003"/>
+</kw>
+<kw name="Input Text" owner="SeleniumLibrary">
+<msg time="2025-06-12T20:26:19.566598" level="INFO">Typing text 'Marcelo' into text field 'xpath=(//input[@class='sc-hPOSDS idfjGh'])[1]'.</msg>
+<arg>xpath=(//input[@class='sc-hPOSDS idfjGh'])[1]</arg>
+<arg>Marcelo</arg>
+<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
+<status status="PASS" start="2025-06-12T20:26:19.566598" elapsed="0.035907"/>
+</kw>
+<kw name="Input Text" owner="SeleniumLibrary">
+<msg time="2025-06-12T20:26:19.603501" level="INFO">Typing text 'marcelo@gmail.com' into text field 'xpath=(//input[@class='sc-hPOSDS idfjGh'])[2]'.</msg>
+<arg>xpath=(//input[@class='sc-hPOSDS idfjGh'])[2]</arg>
+<arg>marcelo@gmail.com</arg>
+<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
+<status status="PASS" start="2025-06-12T20:26:19.603501" elapsed="0.040892"/>
+</kw>
+<kw name="Click Button" owner="SeleniumLibrary">
+<msg time="2025-06-12T20:26:19.645390" level="INFO">Clicking button 'xpath=//button[contains(@class, 'eaUTDe')]'.</msg>
+<arg>xpath=//button[contains(@class, 'eaUTDe')]</arg>
+<doc>Clicks the button identified by ``locator``.</doc>
+<status status="PASS" start="2025-06-12T20:26:19.644393" elapsed="0.223822"/>
+</kw>
+<kw name="Handle Alert" owner="SeleniumLibrary">
+<msg time="2025-06-12T20:26:19.869308" level="INFO">HANDLE::&lt;class 'NoneType'&gt;::None</msg>
+<arg>ACCEPT</arg>
+<doc>Handles the current alert and returns its message.</doc>
+<status status="PASS" start="2025-06-12T20:26:19.869308" elapsed="1.023697"/>
+</kw>
+<kw name="Wait Until Page Contains" owner="SeleniumLibrary">
+<arg>Nome Autor:</arg>
+<doc>Waits until ``text`` appears on the current page.</doc>
+<status status="PASS" start="2025-06-12T20:26:20.893005" elapsed="0.003994"/>
+</kw>
+<status status="PASS" start="2025-06-12T20:26:19.344598" elapsed="1.552401"/>
+</test>
+<test id="s1-t4" name="Abrir menu lateral e acessar livros" line="42">
+<kw name="Wait Until Element Is Not Visible" owner="SeleniumLibrary">
+<arg>css=div.sc-dZnbom.iJRKwS</arg>
+<arg>10s</arg>
+<doc>Waits until the element ``locator`` is not visible.</doc>
+<status status="PASS" start="2025-06-12T20:26:20.898123" elapsed="0.423503"/>
+</kw>
+<kw name="Wait Until Element Is Visible" owner="SeleniumLibrary">
+<arg>css=.sc-gnOvAp.jAMhu</arg>
+<arg>10s</arg>
+<doc>Waits until the element ``locator`` is visible.</doc>
+<status status="PASS" start="2025-06-12T20:26:21.322652" elapsed="0.009027"/>
+</kw>
+<kw name="Click Element" owner="SeleniumLibrary">
+<msg time="2025-06-12T20:26:21.332676" level="INFO">Clicking element 'css=.sc-gnOvAp.jAMhu'.</msg>
+<arg>css=.sc-gnOvAp.jAMhu</arg>
+<doc>Click the element identified by ``locator``.</doc>
+<status status="PASS" start="2025-06-12T20:26:21.332676" elapsed="0.212165"/>
+</kw>
+<kw name="Wait Until Element Is Visible" owner="SeleniumLibrary">
+<arg>xpath=//li[normalize-space()='Livros']</arg>
+<arg>10s</arg>
+<doc>Waits until the element ``locator`` is visible.</doc>
+<status status="PASS" start="2025-06-12T20:26:21.546838" elapsed="0.009427"/>
+</kw>
+<kw name="Click Element" owner="SeleniumLibrary">
+<msg time="2025-06-12T20:26:21.556265" level="INFO">Clicking element 'xpath=//li[normalize-space()='Livros']'.</msg>
+<arg>xpath=//li[normalize-space()='Livros']</arg>
+<doc>Click the element identified by ``locator``.</doc>
+<status status="PASS" start="2025-06-12T20:26:21.556265" elapsed="0.212758"/>
+</kw>
+<kw name="Wait Until Page Contains" owner="SeleniumLibrary">
+<arg>Nome do Livro</arg>
+<doc>Waits until ``text`` appears on the current page.</doc>
+<status status="PASS" start="2025-06-12T20:26:21.770021" elapsed="0.207692"/>
+</kw>
+<status status="PASS" start="2025-06-12T20:26:20.898123" elapsed="1.079590"/>
+</test>
+<test id="s1-t5" name="Criar um Livro" line="51">
+<kw name="Click Button" owner="SeleniumLibrary">
+<msg time="2025-06-12T20:26:21.979451" level="INFO">Clicking button 'xpath=//button[normalize-space(.)='Adicionar Livro']'.</msg>
+<arg>xpath=//button[normalize-space(.)='Adicionar Livro']</arg>
+<doc>Clicks the button identified by ``locator``.</doc>
+<status status="PASS" start="2025-06-12T20:26:21.979451" elapsed="0.220259"/>
+</kw>
+<kw name="Input Text" owner="SeleniumLibrary">
+<msg time="2025-06-12T20:26:22.199710" level="INFO">Typing text 'Flor' into text field 'xpath=(//input[@class='sc-hPOSDS idfjGh'])[1]'.</msg>
+<arg>xpath=(//input[@class='sc-hPOSDS idfjGh'])[1]</arg>
+<arg>Flor</arg>
+<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
+<status status="PASS" start="2025-06-12T20:26:22.199710" elapsed="0.035905"/>
+</kw>
+<kw name="Select From List By Label" owner="SeleniumLibrary">
+<msg time="2025-06-12T20:26:22.236636" level="INFO">Selecting options from selection list 'xpath=//select[@name='authorId']' by label lucas teste.</msg>
+<arg>xpath=//select[@name='authorId']</arg>
+<arg>lucas teste</arg>
+<doc>Selects options from selection list ``locator`` by ``labels``.</doc>
+<status status="PASS" start="2025-06-12T20:26:22.236636" elapsed="0.235119"/>
+</kw>
+<kw name="Input Text" owner="SeleniumLibrary">
+<msg time="2025-06-12T20:26:22.471926" level="INFO">Typing text '300' into text field 'xpath=(//input[@class='sc-hPOSDS idfjGh'])[2]'.</msg>
+<arg>xpath=(//input[@class='sc-hPOSDS idfjGh'])[2]</arg>
+<arg>300</arg>
+<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
+<status status="PASS" start="2025-06-12T20:26:22.471926" elapsed="0.018952"/>
+</kw>
+<kw name="Click Button" owner="SeleniumLibrary">
+<msg time="2025-06-12T20:26:22.490878" level="INFO">Clicking button 'xpath=//button[contains(@class, 'eaUTDe')]'.</msg>
+<arg>xpath=//button[contains(@class, 'eaUTDe')]</arg>
+<doc>Clicks the button identified by ``locator``.</doc>
+<status status="PASS" start="2025-06-12T20:26:22.490878" elapsed="0.224543"/>
+</kw>
+<kw name="Handle Alert" owner="SeleniumLibrary">
+<msg time="2025-06-12T20:26:22.715421" level="INFO">HANDLE::&lt;class 'NoneType'&gt;::None</msg>
+<arg>ACCEPT</arg>
+<doc>Handles the current alert and returns its message.</doc>
+<status status="PASS" start="2025-06-12T20:26:22.715421" elapsed="1.018126"/>
+</kw>
+<status status="PASS" start="2025-06-12T20:26:21.978710" elapsed="1.754837"/>
+</test>
+<test id="s1-t6" name="Pesquisar um Livro" line="60">
+<kw name="Click Button" owner="SeleniumLibrary">
+<msg time="2025-06-12T20:26:23.736054" level="INFO">Clicking button 'xpath=//button[normalize-space(.)='Pesquisar Livro']'.</msg>
+<arg>xpath=//button[normalize-space(.)='Pesquisar Livro']</arg>
+<doc>Clicks the button identified by ``locator``.</doc>
+<status status="PASS" start="2025-06-12T20:26:23.736054" elapsed="0.219549"/>
+</kw>
+<kw name="Wait Until Element Is Visible" owner="SeleniumLibrary">
+<arg>xpath=//select[@name='bookId']</arg>
+<arg>5s</arg>
+<doc>Waits until the element ``locator`` is visible.</doc>
+<status status="PASS" start="2025-06-12T20:26:23.955603" elapsed="0.009974"/>
+</kw>
+<kw name="Select From List By Label" owner="SeleniumLibrary">
+<msg time="2025-06-12T20:26:23.965819" level="INFO">Selecting options from selection list 'xpath=//select[@name='bookId']' by label livro livro.</msg>
+<arg>xpath=//select[@name='bookId']</arg>
+<arg>livro livro</arg>
+<doc>Selects options from selection list ``locator`` by ``labels``.</doc>
+<status status="PASS" start="2025-06-12T20:26:23.965819" elapsed="0.229583"/>
+</kw>
+<kw name="Click Button" owner="SeleniumLibrary">
+<msg time="2025-06-12T20:26:24.195402" level="INFO">Clicking button 'xpath=//button[normalize-space(.)='×']'.</msg>
+<arg>xpath=//button[normalize-space(.)='×']</arg>
+<doc>Clicks the button identified by ``locator``.</doc>
+<status status="PASS" start="2025-06-12T20:26:24.195402" elapsed="0.219956"/>
+</kw>
+<status status="PASS" start="2025-06-12T20:26:23.735543" elapsed="0.679815"/>
+</test>
+<kw name="Close Browser" owner="SeleniumLibrary" type="TEARDOWN">
+<doc>Closes the current browser.</doc>
+<status status="PASS" start="2025-06-12T20:26:24.416251" elapsed="2.828487"/>
+</kw>
+<status status="PASS" start="2025-06-12T20:26:06.275801" elapsed="20.968937"/>
+</suite>
+<statistics>
+<total>
+<stat pass="6" fail="0" skip="0">All Tests</stat>
+</total>
+<tag>
+</tag>
+<suite>
+<stat name="Locators" id="s1" pass="6" fail="0" skip="0">Locators</stat>
+</suite>
+</statistics>
+<errors>
+</errors>
+</robot>
