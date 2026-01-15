@@ -10,23 +10,23 @@ export const App = () => {
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [isAuthenticated, setIsAuthenticated] = useState<boolean>(false)
 
-  // useEffect(() => {
-  //   const loadData = () => {
-  //     setTimeout(() => {
-  //       setIsLoading(false);
-  //     }, 3000);
-  //   };
-  //   loadData();
-  // }, []);
+  useEffect(() => {
+    const loadData = () => {
+      setTimeout(() => {
+        setIsLoading(false);
+      }, 3000);
+    };
+    loadData();
+  }, []);
 
-  // const handleLogin = () => {
-  //   setIsAuthenticated(true);
-  //   localStorage.setItem('isAuthenticated', 'true');
-  // };
+  const handleLogin = () => {
+    setIsAuthenticated(true);
+    localStorage.setItem('isAuthenticated', 'true');
+  };
 
-  // if (isLoading) return <Loading />
+  if (isLoading) return <Loading />
 
-  // if (!isAuthenticated) return <Login onLogin={handleLogin} />
+  if (!isAuthenticated) return <Login onLogin={handleLogin} />
 
   return (
     <>

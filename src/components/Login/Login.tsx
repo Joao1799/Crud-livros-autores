@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { postLogin } from "../../services/Login";
+import { postLogin, postRegister } from "../../services/Login";
 import * as S from "./Login.Styled";
 import * as So from "../Table/Table.Styled";
 
@@ -34,25 +34,25 @@ export const Login = ({ onLogin }: LoginProps) => {
     }
   };
 
-  const handleRegister = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setLoading(true);
-    setError(null);
-    try {
-      const loginResp = await postLogin({ email, senha });
-      if (loginResp && loginResp.user && loginResp.user.name && loginResp.user.email) {
-        onLogin();
-      } else {
-        setError("Erro ao fazer login. Tente novamente.");
-      }
-  
-    } catch (err: any) {
-      console.error("Erro no processo de registro/login:", err);
-      setError(err.message || "Erro ao tentar registrar.");
-    } finally {
-      setLoading(false);
+const handleRegister = async (e: React.FormEvent) => {
+  e.preventDefault();
+  setLoading(true);
+  setError(null);
+
+  try {
+    const registerResp = await postRegister({name:nome,email,senha,});
+    if (registerResp) {
+      onLogin(); 
+    } else {
+      setError("Erro ao registrar. Tente novamente.");
     }
-  };
+  } catch (err: any) {
+    console.error("Erro no processo de registro:", err);
+    setError(err.message || "Erro ao tentar registrar.");
+  } finally {
+    setLoading(false);
+  }
+};
 
   return (
     <S.Container>
