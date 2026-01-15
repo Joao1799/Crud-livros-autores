@@ -87,7 +87,7 @@ export const Login = ({ onLogin }: LoginProps) => {
 
           {!isRegistering && (
             <>
-              <S.Label>Email 2:</S.Label>
+              <S.Label>Email:</S.Label>
               <S.Input
                 placeholder="Seu email..."
                 value={email}
